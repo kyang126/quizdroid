@@ -37,10 +37,13 @@ public class MainActivity3 extends ActionBarActivity {
                 //code here
             Intent nextActivity = new Intent(MainActivity3.this, MainActivity2.class);
             if(topic.equals("Math")) {
-                nextActivity = new Intent(MainActivity3.this, MainActivity7.class);
+                nextActivity.putExtra("topic", "Math");
             } else if (topic.equals("Physics")){
-                nextActivity = new Intent(MainActivity3.this, MainActivity10.class);
+                nextActivity.putExtra("topic", "Physics");
+            } else if (topic.equals("Marvel Super Heroes")){
+                nextActivity.putExtra("topic", "Marvel Super Heroes");
             }
+             nextActivity.putExtra("order", "first");
             startActivity(nextActivity);
             finish();
             }

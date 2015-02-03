@@ -15,6 +15,7 @@ public class MainActivity4 extends ActionBarActivity {
     static final String STATE_q1 = "quiz1";
     private static int answerSum;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,18 +29,21 @@ public class MainActivity4 extends ActionBarActivity {
             answerSum += score;
         }
 
-        int questions =launchedMe.getIntExtra("questionTotal", 0);
+        int questions = launchedMe.getIntExtra("questionTotal", 0);
+        final int q = questions;
+
         String correctAnswer =launchedMe.getStringExtra("correct");
         String selectedAnswer =launchedMe.getStringExtra("selected");
+        final String topic =launchedMe.getStringExtra("topic");
+
         TextView tv = (TextView)findViewById(R.id.textView5);
         tv.setText("You have " + answerSum + " out of " + questions + " correct");
         TextView selected = (TextView)findViewById(R.id.textView14);
         selected.setText("Selected answer: " + selectedAnswer);
         TextView correct = (TextView)findViewById(R.id.textView15);
         correct.setText("Correct answer: " + correctAnswer);
-        final int newA = launchedMe.getIntExtra("newActivity", 0);
         final Button b = (Button) findViewById(R.id.button4);
-        if (newA == 7 || newA == 10 || newA == 13) {
+        if (q == 3) {
             answerSum = 0;
             b.setText("Finish");
         }
@@ -48,24 +52,15 @@ public class MainActivity4 extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //code here
-            Intent nextActivity = new Intent(MainActivity4.this, MainActivity5.class);
-            if (newA == 5) {
-                nextActivity = new Intent(MainActivity4.this, MainActivity5.class);
-            } else if (newA == 6){
-                nextActivity = new Intent(MainActivity4.this, MainActivity6.class);
-            } else if (newA == 8){
-                nextActivity = new Intent(MainActivity4.this, MainActivity8.class);
-            }else if (newA == 9){
-                nextActivity = new Intent(MainActivity4.this, MainActivity9.class);
-            } else if (newA == 11){
-                nextActivity = new Intent(MainActivity4.this, MainActivity11.class);
-            } else if (newA == 12){
-                nextActivity = new Intent(MainActivity4.this, MainActivity12.class);
-            } else if (newA == 7 || newA == 10 || newA == 13){
-
+            Intent nextActivity = new Intent(MainActivity4.this, MainActivity2.class);
+            if (q == 1){
+                nextActivity.putExtra("order", "second");
+            } else if (q == 2){
+                nextActivity.putExtra("order", "third");
+            } else if (q == 3){
                 nextActivity = new Intent(MainActivity4.this, MainActivity.class);
             }
-            nextActivity.putExtra("questionTotal", 1);
+            nextActivity.putExtra("topic", topic);
             startActivity(nextActivity);
             finish();
             }
