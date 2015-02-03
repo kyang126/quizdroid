@@ -16,7 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 
-public class MainActivity2 extends ActionBarActivity {
+public class questionView extends ActionBarActivity {
     private RadioButton answer;
     private static int qCounter;
     private static ArrayList<Questions> qList;
@@ -67,7 +67,7 @@ public class MainActivity2 extends ActionBarActivity {
                 int selectedId = choiceGroup.getCheckedRadioButtonId();
                 RadioButton cButton = (RadioButton)findViewById(selectedId);
                     //code here
-                Intent nextActivity = new Intent(MainActivity2.this, MainActivity4.class);
+                Intent nextActivity = new Intent(questionView.this, summaryView.class);
 
                 if (answer.isChecked()) {
                     nextActivity.putExtra("answer", 1);

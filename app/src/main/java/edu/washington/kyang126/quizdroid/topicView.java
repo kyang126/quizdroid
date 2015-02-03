@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.Date;
 
 
-public class MainActivity3 extends ActionBarActivity {
+public class topicView extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class MainActivity3 extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //code here
-            Intent nextActivity = new Intent(MainActivity3.this, MainActivity2.class);
+            Intent nextActivity = new Intent(topicView.this, questionView.class);
             if(topic.equals("Math")) {
                 nextActivity.putExtra("topic", "Math");
             } else if (topic.equals("Physics")){

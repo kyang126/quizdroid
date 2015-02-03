@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
-public class MainActivity4 extends ActionBarActivity {
+public class summaryView extends ActionBarActivity {
     static final String STATE_q1 = "quiz1";
     private static int answerSum;
 
@@ -52,13 +52,13 @@ public class MainActivity4 extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //code here
-            Intent nextActivity = new Intent(MainActivity4.this, MainActivity2.class);
+            Intent nextActivity = new Intent(summaryView.this, questionView.class);
             if (q == 1){
                 nextActivity.putExtra("order", "second");
             } else if (q == 2){
                 nextActivity.putExtra("order", "third");
             } else if (q == 3){
-                nextActivity = new Intent(MainActivity4.this, MainActivity.class);
+                nextActivity = new Intent(summaryView.this, selectQuizView.class);
             }
             nextActivity.putExtra("topic", topic);
             startActivity(nextActivity);

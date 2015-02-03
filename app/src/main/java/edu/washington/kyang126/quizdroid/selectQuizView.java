@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class MainActivity extends ActionBarActivity {
+public class selectQuizView extends ActionBarActivity {
 GridView myGrid;
 
     @Override
@@ -37,7 +37,7 @@ GridView myGrid;
 
         AdapterView.OnItemClickListener quizItemClicked = new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView parent, View v, int position, long id){
-                Intent nextActivity = new Intent(MainActivity.this, MainActivity3.class);
+                Intent nextActivity = new Intent(selectQuizView.this, topicView.class);
                 if (position == 0) {
                     nextActivity.putExtra("topic", "Math");
                     nextActivity.putExtra("description", "This quiz will be asking questions testing your knowledge on Math");
