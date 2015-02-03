@@ -45,7 +45,7 @@ public class topicView extends ActionBarActivity {
             }
              nextActivity.putExtra("order", "first");
             startActivity(nextActivity);
-            finish();
+
             }
         });
 

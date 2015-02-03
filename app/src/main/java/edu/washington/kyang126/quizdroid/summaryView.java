@@ -62,7 +62,6 @@ public class summaryView extends ActionBarActivity {
             }
             nextActivity.putExtra("topic", topic);
             startActivity(nextActivity);
-            finish();
             }
         });
     }

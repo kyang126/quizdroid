@@ -82,11 +82,13 @@ public class questionView extends ActionBarActivity {
                     qCounter = 0;
                 }
                 startActivity(nextActivity);
-                finish();
-
             }
         });
     }
+@Override
+public void onBackPressed(){
+
+}
 
     private void settingText(RadioButton r1, RadioButton r2, RadioButton r3, RadioButton r4){
         TextView tv = (TextView) findViewById(R.id.textView3);
