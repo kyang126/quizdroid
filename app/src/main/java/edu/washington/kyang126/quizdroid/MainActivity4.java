@@ -21,13 +21,26 @@ public class MainActivity4 extends ActionBarActivity {
         setContentView(R.layout.activity_main_activity4);
         Intent launchedMe = getIntent();
         int score =launchedMe.getIntExtra("answer", 0);
-        answerSum += score;
+
+        if(savedInstanceState != null){
+            answerSum = savedInstanceState.getInt(STATE_q1);;
+        } else{
+            answerSum += score;
+        }
+
         int questions =launchedMe.getIntExtra("questionTotal", 0);
+        String correctAnswer =launchedMe.getStringExtra("correct");
+        String selectedAnswer =launchedMe.getStringExtra("selected");
         TextView tv = (TextView)findViewById(R.id.textView5);
         tv.setText("You have " + answerSum + " out of " + questions + " correct");
+        TextView selected = (TextView)findViewById(R.id.textView14);
+        selected.setText("Selected answer: " + selectedAnswer);
+        TextView correct = (TextView)findViewById(R.id.textView15);
+        correct.setText("Correct answer: " + correctAnswer);
         final int newA = launchedMe.getIntExtra("newActivity", 0);
         final Button b = (Button) findViewById(R.id.button4);
         if (newA == 7 || newA == 10 || newA == 13) {
+            answerSum = 0;
             b.setText("Finish");
         }
 

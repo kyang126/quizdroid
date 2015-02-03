@@ -3,15 +3,17 @@ package edu.washington.kyang126.quizdroid;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.view.View.OnClickListener;
+import android.widget.RadioGroup;
 
 
-public class MainActivity2 extends ActionBarActivity implements OnClickListener{
+public class MainActivity2 extends ActionBarActivity {
     private Button b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,45 +22,52 @@ public class MainActivity2 extends ActionBarActivity implements OnClickListener{
 
         b = (Button) findViewById(R.id.button2);
         final RadioButton r1 = (RadioButton) findViewById(R.id.radioButton);
-        final RadioButton r2 = (RadioButton) findViewById(R.id.radioButton2);
-        final RadioButton r3 = (RadioButton) findViewById(R.id.radioButton3);
-        final RadioButton r4 = (RadioButton) findViewById(R.id.radioButton4);
 
-        r1.setOnClickListener(this);
-        r2.setOnClickListener(this);
-        r3.setOnClickListener(this);
-        r4.setOnClickListener(this);
 
         b.setVisibility(View.INVISIBLE);
+        final RadioGroup choiceGroup = (RadioGroup) findViewById(R.id.radioGroup1);
 
+        choiceGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+            public void onCheckedChanged(RadioGroup rGroup, int checkedId)
+            {
+                // This will get the radiobutton that has changed in its check state
+                RadioButton checkedRadioButton = (RadioButton)rGroup.findViewById(checkedId);
+                // This puts the value (true/false) into the variable
+                boolean isChecked = checkedRadioButton.isChecked();
+                if (isChecked){
+                    b.setVisibility((View.VISIBLE));
+                }
+            }
+        });
 
         b.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                if(r1.isChecked() ||r2.isChecked()||r3.isChecked()||r4.isChecked()) {
+                int selectedId = choiceGroup.getCheckedRadioButtonId();
+                RadioButton cButton = (RadioButton) findViewById(selectedId);
+
                     //code here
-                    Intent nextActivity = new Intent(MainActivity2.this, MainActivity4.class);
-                    //nextActivity.putExtra("timestamp", new Date().toString());
-                    //nextActivity.putExtra()
-                    if (r1.isChecked()) {
-                        nextActivity.putExtra("answer", 1);
-                    } else {
-                        nextActivity.putExtra("answer", 0);
-                    }
-                    nextActivity.putExtra("questionTotal", 1);
-                    nextActivity.putExtra("newActivity", 5);
-                    startActivity(nextActivity);
-                    finish();
+                Intent nextActivity = new Intent(MainActivity2.this, MainActivity4.class);
+                //nextActivity.putExtra("timestamp", new Date().toString());
+                //nextActivity.putExtra()
+
+                if (r1.isChecked()) {
+                    nextActivity.putExtra("answer", 1);
+                } else {
+                    nextActivity.putExtra("answer", 0);
                 }
+                nextActivity.putExtra("correct", r1.getText());
+                nextActivity.putExtra("selected", cButton.getText());
+                nextActivity.putExtra("questionTotal", 1);
+                nextActivity.putExtra("newActivity", 5);
+                startActivity(nextActivity);
+                finish();
+
             }
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        b.setVisibility(View.VISIBLE);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

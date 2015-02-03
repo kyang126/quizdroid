@@ -8,9 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 
-public class MainActivity6 extends ActionBarActivity implements View.OnClickListener{
+public class MainActivity6 extends ActionBarActivity {
 private Button b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,15 +19,22 @@ private Button b;
         setContentView(R.layout.activity_main_activity6);
 
         b = (Button) findViewById(R.id.button5);
-        final RadioButton r1 = (RadioButton) findViewById(R.id.radioButton9);
-        final RadioButton r2 = (RadioButton) findViewById(R.id.radioButton10);
-        final RadioButton r3 = (RadioButton) findViewById(R.id.radioButton11);
-        final RadioButton r4 = (RadioButton) findViewById(R.id.radioButton12);
+        final RadioButton r1 = (RadioButton) findViewById(R.id.radioButton11);
+        final RadioGroup choiceGroup = (RadioGroup) findViewById(R.id.radioGroup3);
 
-        r1.setOnClickListener(this);
-        r2.setOnClickListener(this);
-        r3.setOnClickListener(this);
-        r4.setOnClickListener(this);
+        choiceGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
+            public void onCheckedChanged(RadioGroup rGroup, int checkedId)
+            {
+                // This will get the radiobutton that has changed in its check state
+                RadioButton checkedRadioButton = (RadioButton)rGroup.findViewById(checkedId);
+                // This puts the value (true/false) into the variable
+                boolean isChecked = checkedRadioButton.isChecked();
+                if (isChecked){
+                    b.setVisibility((View.VISIBLE));
+                }
+            }
+        });
+
 
         b.setVisibility(View.INVISIBLE);
 
@@ -35,31 +43,34 @@ private Button b;
             @Override
             public void onClick(View v) {
                 //code here
-                Intent nextActivity = new Intent(MainActivity6.this, MainActivity4.class);
+                int selectedId = choiceGroup.getCheckedRadioButtonId();
+                RadioButton cButton = (RadioButton) findViewById(selectedId);
 
+                //code here
+                Intent nextActivity = new Intent(MainActivity6.this, MainActivity4.class);
                 //nextActivity.putExtra("timestamp", new Date().toString());
                 //nextActivity.putExtra()
-                if(r1.isChecked() ||r2.isChecked()||r3.isChecked()||r4.isChecked()) {
-                    if (r3.isChecked()){
-                        nextActivity.putExtra("answer", 1);
-                    }else{
-                        nextActivity.putExtra("answer", 0);
-                    }
-                    nextActivity.putExtra("questionTotal", 3);
-                    nextActivity.putExtra("newActivity", 7);
-                    startActivity(nextActivity);
-                    finish();
+
+                if (r1.isChecked()) {
+                    nextActivity.putExtra("answer", 1);
+                } else {
+                    nextActivity.putExtra("answer", 0);
                 }
+                nextActivity.putExtra("correct", r1.getText());
+                nextActivity.putExtra("selected", cButton.getText());
+                nextActivity.putExtra("questionTotal", 3);
+                nextActivity.putExtra("newActivity", 7);
+                startActivity(nextActivity);
+                finish();
+
 
             }
+
+
         });
 
     }
 
-    @Override
-    public void onClick(View v) {
-        b.setVisibility(View.VISIBLE);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
