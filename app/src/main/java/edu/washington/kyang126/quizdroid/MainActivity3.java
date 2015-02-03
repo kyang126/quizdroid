@@ -3,6 +3,7 @@ package edu.washington.kyang126.quizdroid;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +21,8 @@ public class MainActivity3 extends ActionBarActivity {
         setContentView(R.layout.activity_main_activity3);
 
         Intent launchedMe = getIntent();
-        String topic =launchedMe.getStringExtra("topic");
+        final String topic =launchedMe.getStringExtra("topic");
+
         String description =launchedMe.getStringExtra("description");
         TextView tv = (TextView)findViewById(R.id.secondScreen);
         tv.setText("Topic Overview: " + topic);
@@ -33,13 +35,14 @@ public class MainActivity3 extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 //code here
-                Intent nextActivity = new Intent(MainActivity3.this, MainActivity2.class);
-
-                //nextActivity.putExtra("timestamp", new Date().toString());
-                //nextActivity.putExtra()
-
-                startActivity(nextActivity);
-                finish();
+            Intent nextActivity = new Intent(MainActivity3.this, MainActivity2.class);
+            if(topic.equals("Math")) {
+                nextActivity = new Intent(MainActivity3.this, MainActivity7.class);
+            } else if (topic.equals("Physics")){
+                nextActivity = new Intent(MainActivity3.this, MainActivity10.class);
+            }
+            startActivity(nextActivity);
+            finish();
             }
         });
 

@@ -3,23 +3,68 @@ package edu.washington.kyang126.quizdroid;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
 public class MainActivity4 extends ActionBarActivity {
+    static final String STATE_q1 = "quiz1";
+    private static int answerSum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity4);
-
         Intent launchedMe = getIntent();
         int score =launchedMe.getIntExtra("answer", 0);
+        answerSum += score;
         int questions =launchedMe.getIntExtra("questionTotal", 0);
         TextView tv = (TextView)findViewById(R.id.textView5);
-        tv.setText("You have " + score + " out of " + questions + " correct");
+        tv.setText("You have " + answerSum + " out of " + questions + " correct");
+        final int newA = launchedMe.getIntExtra("newActivity", 0);
+        final Button b = (Button) findViewById(R.id.button4);
+        if (newA == 7 || newA == 10 || newA == 13) {
+            b.setText("Finish");
+        }
+
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //code here
+            Intent nextActivity = new Intent(MainActivity4.this, MainActivity5.class);
+            if (newA == 5) {
+                nextActivity = new Intent(MainActivity4.this, MainActivity5.class);
+            } else if (newA == 6){
+                nextActivity = new Intent(MainActivity4.this, MainActivity6.class);
+            } else if (newA == 8){
+                nextActivity = new Intent(MainActivity4.this, MainActivity8.class);
+            }else if (newA == 9){
+                nextActivity = new Intent(MainActivity4.this, MainActivity9.class);
+            } else if (newA == 11){
+                nextActivity = new Intent(MainActivity4.this, MainActivity11.class);
+            } else if (newA == 12){
+                nextActivity = new Intent(MainActivity4.this, MainActivity12.class);
+            } else if (newA == 7 || newA == 10 || newA == 13){
+
+                nextActivity = new Intent(MainActivity4.this, MainActivity.class);
+            }
+            nextActivity.putExtra("questionTotal", 1);
+            startActivity(nextActivity);
+            finish();
+            }
+        });
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        // Save the user's current game state
+        savedInstanceState.putInt(STATE_q1, answerSum);
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(savedInstanceState);
     }
 
 

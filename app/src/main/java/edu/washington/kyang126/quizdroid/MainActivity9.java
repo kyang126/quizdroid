@@ -8,21 +8,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
-import android.view.View.OnClickListener;
 
 
-public class MainActivity2 extends ActionBarActivity implements OnClickListener{
+public class MainActivity9 extends ActionBarActivity implements View.OnClickListener {
     private Button b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_activity2);
-
-        b = (Button) findViewById(R.id.button2);
-        final RadioButton r1 = (RadioButton) findViewById(R.id.radioButton);
-        final RadioButton r2 = (RadioButton) findViewById(R.id.radioButton2);
-        final RadioButton r3 = (RadioButton) findViewById(R.id.radioButton3);
-        final RadioButton r4 = (RadioButton) findViewById(R.id.radioButton4);
+        setContentView(R.layout.activity_main_activity9);
+        b = (Button) findViewById(R.id.button8);
+        final RadioButton r1 = (RadioButton) findViewById(R.id.radioButton21);
+        final RadioButton r2 = (RadioButton) findViewById(R.id.radioButton22);
+        final RadioButton r3 = (RadioButton) findViewById(R.id.radioButton23);
+        final RadioButton r4 = (RadioButton) findViewById(R.id.radioButton24);
 
         r1.setOnClickListener(this);
         r2.setOnClickListener(this);
@@ -31,23 +29,22 @@ public class MainActivity2 extends ActionBarActivity implements OnClickListener{
 
         b.setVisibility(View.INVISIBLE);
 
-
         b.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
+                //code here
+                Intent nextActivity = new Intent(MainActivity9.this, MainActivity4.class);
+
+                //nextActivity.putExtra("timestamp", new Date().toString());
+                //nextActivity.putExtra()
                 if(r1.isChecked() ||r2.isChecked()||r3.isChecked()||r4.isChecked()) {
-                    //code here
-                    Intent nextActivity = new Intent(MainActivity2.this, MainActivity4.class);
-                    //nextActivity.putExtra("timestamp", new Date().toString());
-                    //nextActivity.putExtra()
-                    if (r1.isChecked()) {
+                    if (r3.isChecked()){
                         nextActivity.putExtra("answer", 1);
-                    } else {
+                    }else{
                         nextActivity.putExtra("answer", 0);
                     }
-                    nextActivity.putExtra("questionTotal", 1);
-                    nextActivity.putExtra("newActivity", 5);
+                    nextActivity.putExtra("questionTotal", 3);
+                    nextActivity.putExtra("newActivity", 10);
                     startActivity(nextActivity);
                     finish();
                 }
@@ -60,10 +57,11 @@ public class MainActivity2 extends ActionBarActivity implements OnClickListener{
         b.setVisibility(View.VISIBLE);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main_activity2, menu);
+        getMenuInflater().inflate(R.menu.menu_main_activity9, menu);
         return true;
     }
 

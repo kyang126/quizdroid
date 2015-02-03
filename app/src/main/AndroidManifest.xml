@@ -28,6 +28,38 @@
             android:name=".MainActivity4"
             android:label="@string/title_activity_main_activity4" >
         </activity>
+        <activity
+            android:name=".MainActivity5"
+            android:label="@string/title_activity_main_activity5" >
+        </activity>
+        <activity
+            android:name=".MainActivity6"
+            android:label="@string/title_activity_main_activity6" >
+        </activity>
+        <activity
+            android:name=".MainActivity7"
+            android:label="@string/title_activity_main_activity7" >
+        </activity>
+        <activity
+            android:name=".MainActivity8"
+            android:label="@string/title_activity_main_activity8" >
+        </activity>
+        <activity
+            android:name=".MainActivity9"
+            android:label="@string/title_activity_main_activity9" >
+        </activity>
+        <activity
+            android:name=".MainActivity10"
+            android:label="@string/title_activity_main_activity10" >
+        </activity>
+        <activity
+            android:name=".MainActivity11"
+            android:label="@string/title_activity_main_activity11" >
+        </activity>
+        <activity
+            android:name=".MainActivity12"
+            android:label="@string/title_activity_main_activity12" >
+        </activity>
     </application>
 
 </manifest>
