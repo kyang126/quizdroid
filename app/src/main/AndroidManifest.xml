@@ -18,6 +18,7 @@
         </activity>
         <activity
             android:name=".topicView"
+            android:noHistory="true"
             android:label="@string/title_activity_main_activity2" >
         </activity>
         <activity
@@ -26,6 +27,7 @@
         </activity>
         <activity
             android:name=".summaryView"
+            android:noHistory="true"
             android:label="@string/title_activity_main_activity4" >
         </activity>
     </application>

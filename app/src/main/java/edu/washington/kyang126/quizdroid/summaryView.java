@@ -10,41 +10,49 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 
 public class summaryView extends ActionBarActivity {
     static final String STATE_q1 = "quiz1";
-    private static int answerSum;
-
+    private int totalScore;
+    private static int[] answerTotal = new int[3];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_activity4);
+
         Intent launchedMe = getIntent();
-        int score =launchedMe.getIntExtra("answer", 0);
-
-        if(savedInstanceState != null){
-            answerSum = savedInstanceState.getInt(STATE_q1);;
-        } else{
-            answerSum += score;
-        }
-
+        int score = launchedMe.getIntExtra("answer", 0);
         int questions = launchedMe.getIntExtra("questionTotal", 0);
         final int q = questions;
+        Log.i("check sum: ", ""+answerTotal.length);
+        if(savedInstanceState != null){
+            totalScore = savedInstanceState.getInt(STATE_q1);
+        } else {
+            answerTotal[q-1] = score;
+        }
+
+        totalScore = 0;
+
+        for (int i = 0; i < q; i++){
+
+            totalScore += answerTotal[i];
+        }
 
         String correctAnswer =launchedMe.getStringExtra("correct");
         String selectedAnswer =launchedMe.getStringExtra("selected");
         final String topic =launchedMe.getStringExtra("topic");
 
         TextView tv = (TextView)findViewById(R.id.textView5);
-        tv.setText("You have " + answerSum + " out of " + questions + " correct");
+        tv.setText("You have " + totalScore + " out of " + questions + " correct");
         TextView selected = (TextView)findViewById(R.id.textView14);
         selected.setText("Selected answer: " + selectedAnswer);
         TextView correct = (TextView)findViewById(R.id.textView15);
         correct.setText("Correct answer: " + correctAnswer);
         final Button b = (Button) findViewById(R.id.button4);
         if (q == 3) {
-            answerSum = 0;
             b.setText("Finish");
         }
 
@@ -62,14 +70,18 @@ public class summaryView extends ActionBarActivity {
             }
             nextActivity.putExtra("topic", topic);
             startActivity(nextActivity);
+            //finish();
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
     }
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         // Save the user's current game state
-        savedInstanceState.putInt(STATE_q1, answerSum);
+        savedInstanceState.putInt(STATE_q1, totalScore);
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);
     }

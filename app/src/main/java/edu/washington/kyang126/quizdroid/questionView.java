@@ -1,5 +1,6 @@
 package edu.washington.kyang126.quizdroid;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 
 public class questionView extends ActionBarActivity {
     private RadioButton answer;
-    private static int qCounter;
+    private int qCounter;
     private static ArrayList<Questions> qList;
 
     @Override
@@ -32,11 +33,20 @@ public class questionView extends ActionBarActivity {
         RadioButton r3 = (RadioButton) findViewById(R.id.radioButton3);
         RadioButton r4 = (RadioButton) findViewById(R.id.radioButton4);
 
+
         b.setVisibility(View.INVISIBLE);
         Intent launchedMe = getIntent();
         final String topic =launchedMe.getStringExtra("topic");
         answer = (RadioButton) findViewById(R.id.radioButton);
         final String order =launchedMe.getStringExtra("order");
+
+        if  (order.equals("first")){
+            qCounter = 1;
+        } else  if  (order.equals("second")){
+            qCounter = 2;
+        } else  if  (order.equals("third")){
+            qCounter = 3;
+        }
 
         qList = getQuestions(topic, order);
 
@@ -44,7 +54,6 @@ public class questionView extends ActionBarActivity {
 
         answer = getCorrectAnswer(r1, r2, r3, r4);
 
-        qCounter++;
 
         final RadioGroup choiceGroup = (RadioGroup) findViewById(R.id.radioGroup1);
         choiceGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
@@ -78,17 +87,19 @@ public class questionView extends ActionBarActivity {
                 nextActivity.putExtra("selected", cButton.getText());
                 nextActivity.putExtra("questionTotal", qCounter);
                 nextActivity.putExtra("topic", topic);
+
+
+
                 if (qCounter == 3){
                     qCounter = 0;
                 }
+
                 startActivity(nextActivity);
+               // finish();
             }
         });
     }
-@Override
-public void onBackPressed(){
 
-}
 
     private void settingText(RadioButton r1, RadioButton r2, RadioButton r3, RadioButton r4){
         TextView tv = (TextView) findViewById(R.id.textView3);

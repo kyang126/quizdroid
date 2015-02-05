@@ -51,7 +51,7 @@ GridView myGrid;
                     nextActivity.putExtra("description", "This quiz will be asking questions testing your knowledge on Marvel Super Heroes");
                 }
                 startActivity(nextActivity);
-                finish();
+                //finish();
             }
         };
 
