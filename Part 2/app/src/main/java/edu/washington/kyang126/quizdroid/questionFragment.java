@@ -44,6 +44,7 @@ public class questionFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_question_layout, container, false);
+
         return v;
     }
 
@@ -63,7 +64,8 @@ public class questionFragment extends Fragment implements View.OnClickListener {
             qChoices = bQ.getMarvelChoices();
         }
         qChoices.get(questionNumber-1).getQuestion();
-
+        ((fragScreens) getActivity())
+                .setActionBarTitle("Question " + questionNumber);
         String question = qChoices.get(questionNumber-1).getQuestion();
         String answer1 = qChoices.get(questionNumber-1).getAnswers() [0];
         String answer2 = qChoices.get(questionNumber-1).getAnswers() [1];

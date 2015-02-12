@@ -34,6 +34,8 @@ public class summaryFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_summary_layout, container, false);
+        ((fragScreens) getActivity())
+                .setActionBarTitle("Summary");
         return v;
     }
 
