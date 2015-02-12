@@ -35,6 +35,9 @@ public class fragScreens extends ActionBarActivity implements Communicator  {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.add(R.id.frag2, fragobj);
+
+        ft.setCustomAnimations(android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right);
         ft.commit();
     }
 
@@ -71,6 +74,8 @@ public class fragScreens extends ActionBarActivity implements Communicator  {
         Fragment fragobj = new questionFragment();
         fragobj.setArguments(bundle);
         ft.add(R.id.frag2, fragobj);
+        ft.setCustomAnimations(android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right);
         ft.commit();
     }
 
@@ -96,6 +101,8 @@ public class fragScreens extends ActionBarActivity implements Communicator  {
         Fragment fragobj = new summaryFragment();
         fragobj.setArguments(bundle);
         ft.add(R.id.frag2, fragobj);
+        ft.setCustomAnimations(android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right);
         ft.commit();
     }
 }
