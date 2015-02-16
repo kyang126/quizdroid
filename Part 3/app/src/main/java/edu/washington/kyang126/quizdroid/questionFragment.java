@@ -16,6 +16,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by Kevin on 2/10/2015.
@@ -27,9 +29,7 @@ public class questionFragment extends Fragment implements View.OnClickListener {
     Communicator comm;
     String topic;
     int questionNumber;
-
-    static final String STATE_q1 = "quiz1";
-    ArrayList<Questions> qChoices;
+    ArrayList<Quiz> questions;
     @Override
     public void onAttach (Activity activity){
         super.onAttach(activity);
@@ -54,23 +54,24 @@ public class questionFragment extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         topic = getArguments().getString("topic");
         questionNumber = getArguments().getInt("questionNumber");
-        buildQuestions bQ = new buildQuestions();
-        qChoices = new ArrayList<Questions>();
+        List<Topic> topics = MySingleton.getInstance().getTopic();
+        questions = new ArrayList<>();
         if (topic.equals("Math")) {
-            qChoices = bQ.getMathChoices();
+            questions = topics.get(0).getQuestions();
+
         } else if (topic.equals("Physics")) {
-            qChoices = bQ.getPhysicsChoices();
+            questions = topics.get(1).getQuestions();
         } else if (topic.equals("Marvel Super Heroes")) {
-            qChoices = bQ.getMarvelChoices();
+            questions = topics.get(2).getQuestions();
         }
-        qChoices.get(questionNumber-1).getQuestion();
+
         ((fragScreens) getActivity())
                 .setActionBarTitle("Question " + questionNumber);
-        String question = qChoices.get(questionNumber-1).getQuestion();
-        String answer1 = qChoices.get(questionNumber-1).getAnswers() [0];
-        String answer2 = qChoices.get(questionNumber-1).getAnswers() [1];
-        String answer3 = qChoices.get(questionNumber-1).getAnswers() [2];
-        String answer4 = qChoices.get(questionNumber-1).getAnswers() [3];
+        String question = questions.get(questionNumber-1).getQuestion();
+        String answer1 = questions.get(questionNumber-1).getAnswer1();
+        String answer2 = questions.get(questionNumber-1).getAnswer2();
+        String answer3 = questions.get(questionNumber-1).getAnswer3();
+        String answer4 = questions.get(questionNumber-1).getAnswer4();
         TextView tv = (TextView) getActivity().findViewById(R.id.textView9);
         RadioButton r1 = (RadioButton) getActivity().findViewById(R.id.radioButton5);
         RadioButton r2 = (RadioButton) getActivity().findViewById(R.id.radioButton6);
@@ -104,11 +105,23 @@ public class questionFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         int answerPoint = 0;
         String answer = "";
-        answer = qChoices.get(questionNumber-1).getAnswer();
+        int correctIndex = questions.get(questionNumber-1).getCorrect();
+
+        if (correctIndex == 1) {
+            answer = questions.get(questionNumber-1).getAnswer1();
+        }
+        if (correctIndex == 2) {
+            answer = questions.get(questionNumber-1).getAnswer2();
+        }
+        if (correctIndex == 3) {
+            answer = questions.get(questionNumber-1).getAnswer3();
+        }
+        if (correctIndex == 4) {
+            answer = questions.get(questionNumber-1).getAnswer4();
+        }
         if (checkedRadioButton.getText().toString().equals(answer)) {
             answerPoint = 1;
         }
-
         comm.respondSummary(questionNumber, answerPoint, checkedRadioButton.getText().toString(), answer);
     }
 }

@@ -108,8 +108,8 @@ public class MySingleton implements TopicRepository{
 
         Topic physics = new Topic();
         physics.setTitle("Physics");
-        physics.setShortDesc("This quiz will be asking 3 questions testing your knowledge on Physics");
-        physics.setLongDesc("This quiz will have 3 questions testing all the knowledge you have gained about Physics");
+        physics.setShortDesc("This quiz will be testing your knowledge on Physics");
+        physics.setLongDesc("This quiz will be testing all the knowledge you have gained about Physics");
         physics.setQuestions(questions2);
 
         List<Quiz> questions3 = new ArrayList<Quiz>();
@@ -144,8 +144,8 @@ public class MySingleton implements TopicRepository{
 
         Topic marvel = new Topic();
         marvel.setTitle("Marvel Super Heroes");
-        marvel.setShortDesc("This quiz will be asking 3 questions testing your knowledge on Marvel Superheroes");
-        marvel.setLongDesc("This quiz will have 3 questions testing all the knowledge you have gained about Marvel Super Heroes");
+        marvel.setShortDesc("This quiz will be testing your knowledge on Marvel Superheroes");
+        marvel.setLongDesc("This quiz will be testing all the knowledge you have gained about Marvel Super Heroes");
         marvel.setQuestions(questions3);
 
         topics.add(0, math);

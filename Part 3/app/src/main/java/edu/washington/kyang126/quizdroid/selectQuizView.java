@@ -19,7 +19,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 
 public class selectQuizView extends ActionBarActivity {
@@ -36,41 +38,21 @@ public class selectQuizView extends ActionBarActivity {
         String [] myQuizArray = {"Math", "Physics", "Marvel Super Heroes"};
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myQuizArray);
         myList.setAdapter(myAdapter);
-
+        final List<Topic> topics = MySingleton.getInstance().getTopic();
         AdapterView.OnItemClickListener quizItemClicked = new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView parent, View v, int position, long id){
                 Intent nextActivity = new Intent(selectQuizView.this, fragScreens.class);
-                if (position == 0) {
-                    nextActivity.putExtra("topic", "Math");
-                    nextActivity.putExtra("description", "This quiz will be asking questions testing your knowledge on Math");
-                }
-                if (position == 1) {
-                    nextActivity.putExtra("topic", "Physics");
-                    nextActivity.putExtra("description", "This quiz will be asking questions testing your knowledge on Physics");
-                }
-                if (position == 2) {
-                    nextActivity.putExtra("topic", "Marvel Super Heroes");
-                    nextActivity.putExtra("description", "This quiz will be asking questions testing your knowledge on Marvel Super Heroes");
-                }
+                String topic= topics.get(position).getTitle();
+                String desc = topics.get(position).getLongDesc();
+                nextActivity.putExtra("topic", topic);
+                nextActivity.putExtra("description", desc);
+
                 startActivity(nextActivity);
                 //finish();
             }
         };
 
         myList.setOnItemClickListener(quizItemClicked);
-
-
-        // Get the application instance
-        app = (QuizApp)getApplication();
-
-        // Call a custom application method
-        app.customAppMethod();
-
-        // Call a custom method in MySingleton
-        MySingleton.getInstance().customSingletonMethod();
-
-        // Read the value of a variable in MySingleton
-        String singletonVar = MySingleton.getInstance().customVar;
 
 
     }

@@ -3,6 +3,7 @@ package edu.washington.kyang126.quizdroid;
 import android.app.Application;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -13,7 +14,7 @@ public class Topic extends Application implements Serializable {
     private String title;
     private String shortDesc;
     private String longDesc;
-    private Collection<Quiz> questions;
+    private ArrayList<Quiz> questions;
 
     public void Topic(){}
 
@@ -42,10 +43,10 @@ public class Topic extends Application implements Serializable {
     }
 
     public void setQuestions(Collection<Quiz> q){
-        this.questions = q;
+        this.questions = (ArrayList) q;
     }
 
-    public Collection<Quiz> getQuestions(){
+    public ArrayList<Quiz> getQuestions(){
         return this.questions;
     }
 
