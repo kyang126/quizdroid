@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">quizdroid</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string-array name="quizNames">
+        <item>Math</item>
+        <item>Physics</item>
+        <item>Marvel Super Heroes</item>
+    </string-array>
+    <string name="title_activity_frag_screens">QuizDroid</string>
+    <string name="title_activity_summary_fragment">summaryFragment</string>
+
+</resources>
