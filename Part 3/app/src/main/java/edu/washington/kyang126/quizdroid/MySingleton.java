@@ -71,8 +71,8 @@ public class MySingleton implements TopicRepository{
 
         Topic math = new Topic();
         math.setTitle("Math");
-        math.setShortDesc("This quiz will be asking 3 questions testing your knowledge on Math");
-        math.setLongDesc("This quiz will have 3 questions testing all the knowledge you have gained about Math");
+        math.setShortDesc("This quiz will be asking questions testing your knowledge on Math");
+        math.setLongDesc("This quiz will be testing all the knowledge you have gained about Math");
         math.setQuestions(questions1);
 
         List<Quiz> questions2 = new ArrayList<Quiz>();

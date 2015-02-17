@@ -88,13 +88,13 @@ public class questionFragment extends Fragment implements View.OnClickListener {
         choiceGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
             public void onCheckedChanged(RadioGroup rGroup, int checkedId)
             {
-                // This will get the radiobutton that has changed in its check state
-                checkedRadioButton = (RadioButton)rGroup.findViewById(checkedId);
-                // This puts the value (true/false) into the variable
-                boolean isChecked = checkedRadioButton.isChecked();
-                if (isChecked){
-                    button.setVisibility((View.VISIBLE));
-                }
+            // This will get the radiobutton that has changed in its check state
+            checkedRadioButton = (RadioButton)rGroup.findViewById(checkedId);
+            // This puts the value (true/false) into the variable
+            boolean isChecked = checkedRadioButton.isChecked();
+            if (isChecked){
+                button.setVisibility((View.VISIBLE));
+            }
             }
         });
         button.setOnClickListener(this);
