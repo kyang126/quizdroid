@@ -17,6 +17,7 @@ public class fragScreens extends ActionBarActivity implements Communicator  {
     String topic;
     private int totalScore;
     private static int[] answerTotal = new int[3];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

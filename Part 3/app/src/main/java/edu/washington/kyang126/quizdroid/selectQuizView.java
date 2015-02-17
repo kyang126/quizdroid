@@ -26,7 +26,6 @@ import java.util.List;
 
 public class selectQuizView extends ActionBarActivity {
     ListView myList;
-    protected QuizApp app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +37,9 @@ public class selectQuizView extends ActionBarActivity {
         String [] myQuizArray = {"Math", "Physics", "Marvel Super Heroes"};
         ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myQuizArray);
         myList.setAdapter(myAdapter);
-        final List<Topic> topics = MySingleton.getInstance().getTopic();
+
+        QuizApp app = (QuizApp)getApplication();
+        final List<Topic> topics = MySingleton.getInstance().getData();
         AdapterView.OnItemClickListener quizItemClicked = new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView parent, View v, int position, long id){
                 Intent nextActivity = new Intent(selectQuizView.this, fragScreens.class);

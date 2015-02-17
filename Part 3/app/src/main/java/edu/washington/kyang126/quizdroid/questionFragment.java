@@ -54,7 +54,7 @@ public class questionFragment extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         topic = getArguments().getString("topic");
         questionNumber = getArguments().getInt("questionNumber");
-        List<Topic> topics = MySingleton.getInstance().getTopic();
+        List<Topic> topics = MySingleton.getInstance().getData();
         questions = new ArrayList<>();
         if (topic.equals("Math")) {
             questions = topics.get(0).getQuestions();

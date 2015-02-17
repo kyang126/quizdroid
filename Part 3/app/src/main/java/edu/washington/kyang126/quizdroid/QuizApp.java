@@ -6,7 +6,10 @@ package edu.washington.kyang126.quizdroid;
 import android.app.Application;
 import android.util.Log;
 
-public class QuizApp extends Application {
+import java.util.List;
+
+public class QuizApp extends Application  {
+
     @Override
     public void onCreate()
     {
@@ -28,5 +31,4 @@ public class QuizApp extends Application {
     {
         // Custom application method
     }
-
 }
