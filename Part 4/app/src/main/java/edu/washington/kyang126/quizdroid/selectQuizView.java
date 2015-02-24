@@ -82,7 +82,6 @@ public class selectQuizView extends ActionBarActivity {
                 String desc = topics.get(position).getLongDesc();
                 nextActivity.putExtra("topic", topic);
                 nextActivity.putExtra("description", desc);
-
                 startActivity(nextActivity);
                 //finish();
             }

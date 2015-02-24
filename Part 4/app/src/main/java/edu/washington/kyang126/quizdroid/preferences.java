@@ -4,6 +4,9 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,24 +25,16 @@ public class preferences extends ActionBarActivity {
     private boolean alarmUp;
     private EditText getUrl;
     private EditText getTime;
-    static final String STATE_P1 = "player1";
-    static final String STATE_P2 = "player2";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
-        String old1 = "1";
-        String old2 = "1";
-
-        if (savedInstanceState != null) {
-            // Restore value of members from saved state
-            old1 = savedInstanceState.getString(STATE_P1);
-            old2 = savedInstanceState.getString(STATE_P2);
-        }
 
         getUrl = (EditText) this.findViewById(R.id.editText);
         getTime = (EditText) this.findViewById(R.id.editText2);
+        loadSavedPreferences();
 
         final Button startButton = (Button) this.findViewById(R.id.button);
         count = 0;
@@ -89,15 +84,33 @@ public class preferences extends ActionBarActivity {
         });
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        // Save the user's current game state
-        savedInstanceState.putString(STATE_P1, getUrl.getText().toString());
-        savedInstanceState.putString(STATE_P2, getTime.getText().toString());
 
-        // Always call the superclass so it can save the view hierarchy state
-        super.onSaveInstanceState(savedInstanceState);
+    private void loadSavedPreferences() {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+
+        getUrl.setText(sharedPreferences.getString("getUrl",""));
+        getTime.setText(sharedPreferences.getString("getTime",""));
+
     }
+    private void savePreferences(String key, String value) {
+        SharedPreferences sharedPreferences = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+    public void saveData(){
+        savePreferences("getUrl", getUrl.getText().toString());
+        savePreferences("getTime", getTime.getText().toString());
+    }
+    @Override
+    public void onBackPressed(){
+        saveData();
+        super.onBackPressed();
+    }
+
+
 
 
     public void start() {
