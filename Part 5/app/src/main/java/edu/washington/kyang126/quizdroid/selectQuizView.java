@@ -70,11 +70,6 @@ public class selectQuizView extends ActionBarActivity {
         myList = (ListView)findViewById(R.id.listView);
         myList.setAdapter(sa);
 
-       /*String [] myQuizArray = {"Math", "Physics", "Marvel Super Heroes"};
-        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, myQuizArray);
-        myList.setAdapter(myAdapter); */
-
-
         AdapterView.OnItemClickListener quizItemClicked = new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView parent, View v, int position, long id){
                 Intent nextActivity = new Intent(selectQuizView.this, fragScreens.class);

@@ -49,14 +49,6 @@
 
         <receiver android:name=".AlarmReceiver" />
 
-        <activity
-            android:name=".downloadActivity"
-            android:label="@string/title_activity_download" >
-        </activity>
-        <activity
-            android:name=".displayActivity"
-            android:label="@string/title_activity_display" >
-        </activity>
     </application>
 
 </manifest>

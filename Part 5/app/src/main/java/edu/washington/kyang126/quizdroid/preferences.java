@@ -75,7 +75,7 @@ public class preferences extends ActionBarActivity {
 
       startButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(!getTime.getText().toString().matches("") && !getUrl.getText().toString().matches("")){
+                if (!getTime.getText().toString().matches("") && !getUrl.getText().toString().matches("")) {
 
                     try {
                         time = Integer.parseInt(getTime.getText().toString());
@@ -85,25 +85,7 @@ public class preferences extends ActionBarActivity {
 
                 }
 
-                if (time > 0 || alarmUp ) {
-
-
-                    dm = (DownloadManager) getSystemService(DOWNLOAD_SERVICE);
-                    DownloadManager.Request request = new DownloadManager.Request(Uri.parse("http://tednewardsandbox.site44.com/questions.json"));
-
-                    request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI
-                            | DownloadManager.Request.NETWORK_MOBILE)
-                            .setAllowedOverRoaming(false)
-                            .setTitle("quizdata")
-                            .setDescription("Quiz Data for application")
-                            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,
-                                    "quizdata.json");
-
-                    long download_id = dm.enqueue(request);
-                    //Save the download id
-                    SharedPreferences.Editor PrefEdit = preferenceManager.edit();
-                    PrefEdit.putLong(Download_ID, download_id);
-                    PrefEdit.commit();
+                if (time > 0 || alarmUp) {
 
                     if (isAirplaneModeOn(preferences.this)) {
 
@@ -135,120 +117,28 @@ public class preferences extends ActionBarActivity {
                                 Toast.LENGTH_LONG).show();
 
                     }
-
                     count++;
                     //create the toast object, set display duration,
                     alarmIntent.putExtra("url", getUrl.getText().toString());
                     pendingIntent = PendingIntent.getBroadcast(preferences.this, 0, alarmIntent, 0);
 
-                    BroadcastReceiver receiver = new BroadcastReceiver() {
-                        @Override
-                        public void onReceive(Context context, Intent intent) {
-                                DownloadManager.Query query = new DownloadManager.Query();
-                                query.setFilterById(preferenceManager.getLong(Download_ID, 0));
-                                Cursor cursor = dm.query(query);
-
-                                if (cursor.moveToFirst()) {
-                                    int columnIndex = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
-                                    int status = cursor.getInt(columnIndex);
-                                    int columnReason = cursor.getColumnIndex(DownloadManager.COLUMN_REASON);
-                                    int reason = cursor.getInt(columnReason);
-
-                                    if (status == DownloadManager.STATUS_SUCCESSFUL) {
-                                        //Retrieve the saved download id
-                                        String JSONString = null;
-                                        JSONObject JSONObject = null;
-                                        try {
-                                            File path = Environment.getExternalStoragePublicDirectory(
-                                                    Environment.DIRECTORY_DOWNLOADS);
-                                            File file = new File(path, "quizdata.json");
-
-                                            //open the inputStream to the file
-                                            InputStream inputStream = new FileInputStream(file);
-
-                                            int sizeOfJSONFile = inputStream.available();
-
-                                            //array that will store all the data
-                                            byte[] bytes = new byte[sizeOfJSONFile];
-
-                                            //reading data into the array from the file
-                                            inputStream.read(bytes);
-
-                                            //close the input stream
-                                            inputStream.close();
-
-                                            JSONString = new String(bytes, "UTF-8");
-                                            JSONArray questions = new JSONArray(JSONString);
-                                            String element = questions.getString(0);
-                                            Log.i("jsontest", element + "this works");
-                                            // Log.i("json", "this succeeded");
-                                        } catch (IOException ex) {
-                                            ex.printStackTrace();
-                                        } catch (JSONException x) {
-                                            x.printStackTrace();
-                                        }
-
-                                    } else if (status == DownloadManager.STATUS_FAILED) {
-                                        final AlertDialog.Builder alert = new AlertDialog.Builder(preferences.this);
-                                        alert.setMessage("Would you like to try again?");
-                                        alert.setTitle("Failure");
-                                        alert.setIcon(R.drawable.ic_launcher);
-
-                                        alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Intent nextActivity = new Intent(preferences.this, preferences.class);
-                                                startActivity(nextActivity);
-                                            }
-
-                                        });
-                                        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                Intent intent = new Intent(Intent.ACTION_MAIN);
-                                                intent.addCategory(Intent.CATEGORY_HOME);
-                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                startActivity(intent);
-                                            }
-
-                                        });
-                                        alert.create();
-                                        alert.show();
-                                    } else if (status == DownloadManager.STATUS_PAUSED) {
-                                        Toast.makeText(preferences.this,
-                                                "PAUSED!\n" + "reason of " + reason,
-                                                Toast.LENGTH_LONG).show();
-                                    } else if (status == DownloadManager.STATUS_PENDING) {
-                                        Toast.makeText(preferences.this,
-                                                "PENDING!",
-                                                Toast.LENGTH_LONG).show();
-                                    } else if (status == DownloadManager.STATUS_RUNNING) {
-                                        Toast.makeText(preferences.this,
-                                                "RUNNING!",
-                                                Toast.LENGTH_LONG).show();
-                                    }
-                                 }
-
-                        }
-                    };
-
-                    registerReceiver(receiver, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-
-
 
                     startButton.setText("Stop");
 
-                    if (count == 1 && time > 0 && !alarmUp){
+                    if (count == 1 && time > 0 && !alarmUp) {
 
                         start();
-                    }else if (count == 2 || alarmUp){
+                    } else if (count == 2 || alarmUp) {
                         cancel();
                         count = 0;
                         startButton.setText("Start");
                         alarmUp = false;
                     }
-                } else{
+                } else {
                     Toast.makeText(getApplicationContext(), "Check your input values again", Toast.LENGTH_SHORT).show();
                 }
             }
+
         });
     }
 

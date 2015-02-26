@@ -2,18 +2,18 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Kevin\Documents\quizdroid\Part 4\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="C:\Users\Kevin\Documents\quizdroid\Part 4\app\build\intermediates\pre-dexed\debug\classes-66efbb2adc790e96971051042acf7a58fb338910.jar" />
-    </item>
-    <item
         jar="C:\Users\Kevin\Documents\quizdroid\Part 4\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\21.0.3\classes.jar"
         jumboMode="false"
         revision="21.1.2"
         sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
         <dex dex="C:\Users\Kevin\Documents\quizdroid\Part 4\app\build\intermediates\pre-dexed\debug\classes-2aec33589187c02b422aa61269ddbf3abb07aae6.jar" />
+    </item>
+    <item
+        jar="C:\Users\Kevin\Documents\quizdroid\Part 4\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="C:\Users\Kevin\Documents\quizdroid\Part 4\app\build\intermediates\pre-dexed\debug\classes-66efbb2adc790e96971051042acf7a58fb338910.jar" />
     </item>
     <item
         jar="C:\Users\Kevin\Documents\quizdroid\Part 4\app\build\intermediates\exploded-aar\com.android.support\support-v4\21.0.3\libs\internal_impl-21.0.3.jar"
