@@ -47,19 +47,19 @@ public class selectQuizView extends ActionBarActivity {
         final List<Topic> topics = MySingleton.getInstance().getData();
 
         HashMap<String,String> item;
-        String[][] StatesAndCapitals =
+        String[][] quiz =
                 {{topics.get(0).getTitle(),topics.get(0).getShortDesc()},
 
                         {topics.get(1).getTitle(),topics.get(1).getShortDesc()},
 
                         {topics.get(2).getTitle(),topics.get(2).getShortDesc()}};
-        for(int i=0;i<StatesAndCapitals.length;i++){
+        for(int i=0;i<quiz.length;i++){
 
             item = new HashMap<String,String>();
 
-            item.put( "line1", StatesAndCapitals[i][0]);
+            item.put( "line1", quiz[i][0]);
 
-            item.put( "line2", StatesAndCapitals[i][1]);
+            item.put( "line2", quiz[i][1]);
 
             list.add( item );
 

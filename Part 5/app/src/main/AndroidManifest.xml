@@ -47,7 +47,10 @@
             android:label="@string/title_activity_preferences" >
         </activity>
 
-        <receiver android:name=".AlarmReceiver" />
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true" >
+        </receiver>
 
     </application>
 
